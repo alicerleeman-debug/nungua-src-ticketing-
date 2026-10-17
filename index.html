@@ -1,0 +1,568 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#071b35">
+<title>Nungua SHS | SRC Day Tickets</title>
+
+<style>
+:root {
+--navy: #071b35;
+--blue: #123d70;
+--gold: #ffc857;
+--white: #ffffff;
+--light: #f3f6fb;
+--text: #182438;
+--muted: #68758a;
+--green: #168553;
+}
+
+* {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+}
+
+body {
+font-family: Arial, Helvetica, sans-serif;
+background: var(--light);
+color: var(--text);
+line-height: 1.6;
+}
+
+header {
+background: var(--navy);
+color: white;
+padding: 18px 6%;
+display: flex;
+justify-content: space-between;
+align-items: center;
+gap: 15px;
+flex-wrap: wrap;
+}
+
+.brand {
+font-size: 19px;
+font-weight: bold;
+}
+
+.brand span {
+color: var(--gold);
+}
+
+.demo-label {
+background: #fff1c9;
+color: #664700;
+padding: 5px 10px;
+border-radius: 20px;
+font-size: 12px;
+font-weight: bold;
+}
+
+.hero {
+background: linear-gradient(135deg, #071b35, #164c83);
+color: white;
+text-align: center;
+padding: 65px 20px 75px;
+}
+
+.school-badge {
+width: 85px;
+height: 85px;
+margin: 0 auto 20px;
+display: grid;
+place-items: center;
+border: 3px solid var(--gold);
+border-radius: 50%;
+font-size: 22px;
+font-weight: bold;
+color: var(--gold);
+}
+
+.hero h1 {
+font-size: clamp(30px, 7vw, 49px);
+line-height: 1.2;
+margin-bottom: 15px;
+}
+
+.hero p {
+max-width: 620px;
+margin: 0 auto 25px;
+color: #e3eaf4;
+}
+
+.button {
+display: inline-block;
+border: none;
+border-radius: 8px;
+padding: 13px 21px;
+background: var(--gold);
+color: var(--navy);
+font-size: 15px;
+font-weight: bold;
+text-decoration: none;
+cursor: pointer;
+}
+
+.button:hover {
+opacity: 0.9;
+}
+
+.section {
+width: min(1000px, 90%);
+margin: 45px auto;
+}
+
+.section-title {
+text-align: center;
+font-size: 27px;
+margin-bottom: 10px;
+color: var(--navy);
+}
+
+.section-subtitle {
+text-align: center;
+color: var(--muted);
+margin-bottom: 28px;
+}
+
+.info-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+gap: 16px;
+}
+
+.info-card {
+background: white;
+padding: 23px;
+border-radius: 12px;
+box-shadow: 0 4px 18px #071b3510;
+text-align: center;
+}
+
+.info-card .icon {
+font-size: 30px;
+margin-bottom: 8px;
+}
+
+.info-card h3 {
+color: var(--navy);
+margin-bottom: 5px;
+}
+
+.ticket-price {
+font-size: 30px;
+font-weight: bold;
+color: var(--green);
+}
+
+.ticket-layout {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 25px;
+align-items: start;
+}
+
+.panel {
+background: white;
+border-radius: 14px;
+padding: 25px;
+box-shadow: 0 4px 18px #071b3510;
+}
+
+.panel h3 {
+color: var(--navy);
+margin-bottom: 17px;
+}
+
+label {
+display: block;
+font-weight: bold;
+margin: 15px 0 7px;
+font-size: 14px;
+}
+
+input {
+width: 100%;
+padding: 13px;
+border: 1px solid #cbd4e1;
+border-radius: 7px;
+font-size: 16px;
+}
+
+input:focus {
+outline: 2px solid #aac9f4;
+border-color: var(--blue);
+}
+
+.full-button {
+width: 100%;
+margin-top: 20px;
+}
+
+.note {
+background: #fff6dc;
+border-left: 4px solid var(--gold);
+padding: 12px;
+margin-top: 16px;
+font-size: 13px;
+color: #624d19;
+border-radius: 5px;
+}
+
+.features {
+list-style: none;
+}
+
+.features li {
+padding: 10px 0;
+border-bottom: 1px solid #edf0f5;
+}
+
+.features li:last-child {
+border-bottom: none;
+}
+
+.ticket-result {
+display: none;
+margin-top: 22px;
+padding: 20px;
+background: #eaf8ef;
+border: 1px solid #b6e3c5;
+border-radius: 10px;
+overflow-wrap: anywhere;
+}
+
+.ticket-result h3 {
+color: var(--green);
+}
+
+.sample-ticket {
+background: white;
+padding: 18px;
+margin-top: 14px;
+border: 2px dashed #168553;
+border-radius: 10px;
+text-align: center;
+}
+
+.sample-ticket .ticket-code {
+font-size: 19px;
+font-weight: bold;
+color: var(--navy);
+margin: 8px 0;
+}
+
+.qr-placeholder {
+background: #f1f3f6;
+padding: 15px;
+margin: 12px auto;
+max-width: 220px;
+border-radius: 8px;
+color: #586579;
+font-size: 13px;
+}
+
+.sample-watermark {
+color: #b33b2e;
+font-weight: bold;
+font-size: 12px;
+margin-top: 10px;
+}
+
+.steps {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+gap: 18px;
+}
+
+.step {
+background: white;
+border-radius: 10px;
+padding: 20px;
+}
+
+.step-number {
+width: 35px;
+height: 35px;
+border-radius: 50%;
+display: grid;
+place-items: center;
+background: var(--navy);
+color: var(--gold);
+font-weight: bold;
+margin-bottom: 12px;
+}
+
+footer {
+background: var(--navy);
+color: #dbe5f2;
+text-align: center;
+padding: 28px 15px;
+margin-top: 50px;
+font-size: 13px;
+}
+
+footer strong {
+color: var(--gold);
+}
+
+@media (max-width: 700px) {
+.ticket-layout {
+grid-template-columns: 1fr;
+}
+
+.hero {
+padding: 48px 18px 55px;
+}
+
+header {
+padding: 15px 5%;
+}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="brand">NUNGUA <span>SHS</span> | SRC</div>
+<div class="demo-label">DEMO WEBSITE</div>
+</header>
+
+<section class="hero">
+<div class="school-badge">NSHS</div>
+
+<h1>SRC DAY 2026</h1>
+
+<p>
+Get ready for an exciting day of fun, unity and unforgettable
+memories at Nungua Senior High School.
+</p>
+
+<a class="button" href="#buy-ticket">Get Your Ticket</a>
+</section>
+
+<section class="section">
+<h2 class="section-title">Event Information</h2>
+<p class="section-subtitle">
+Everything you need to know about SRC Day.
+</p>
+
+<div class="info-grid">
+<div class="info-card">
+<div class="icon">📅</div>
+<h3>Event Date</h3>
+<p>23 November 2026</p>
+</div>
+
+<div class="info-card">
+<div class="icon">🎟️</div>
+<h3>Ticket Price</h3>
+<p class="ticket-price">GH₵30</p>
+<p>One ticket type</p>
+</div>
+
+<div class="info-card">
+<div class="icon">🏫</div>
+<h3>Venue</h3>
+<p>Nungua Senior High School</p>
+</div>
+</div>
+</section>
+
+<section class="section" id="buy-ticket">
+<h2 class="section-title">Get Your SRC Day Ticket</h2>
+<p class="section-subtitle">
+Enter your details to preview the ticket registration process.
+</p>
+
+<div class="ticket-layout">
+
+<div class="panel">
+<h3>Student Details</h3>
+
+<form id="ticketForm">
+<label for="studentName">Full Name</label>
+<input
+type="text"
+id="studentName"
+placeholder="Enter your full name"
+maxlength="100"
+required
+>
+
+<label for="studentPhone">Phone Number</label>
+<input
+type="tel"
+id="studentPhone"
+placeholder="e.g. 0241234567"
+maxlength="20"
+required
+>
+
+<div class="note">
+This is a demonstration only. No payment will be collected,
+and the sample ticket is not valid for event entry.
+</div>
+
+<button class="button full-button" type="submit">
+Preview Demo Ticket
+</button>
+</form>
+
+<div class="ticket-result" id="ticketResult" aria-live="polite">
+<h3>Demo Ticket Preview</h3>
+<p>Your sample ticket has been created in this browser.</p>
+
+<div class="sample-ticket">
+<strong>NUNGUA SHS SRC DAY 2026</strong>
+<div class="ticket-code" id="ticketCode"></div>
+<p id="ticketName"></p>
+<p>Event: 23 November 2026</p>
+<p>Ticket price: GH₵30</p>
+<p>Payment status: NOT PAID</p>
+
+<div class="qr-placeholder">
+QR ticket generation will be connected in the next stage.
+</div>
+
+<div class="sample-watermark">
+DEMO ONLY — NOT VALID FOR ENTRY
+</div>
+</div>
+
+<button class="button full-button" id="printTicket" type="button">
+Print / Save as PDF
+</button>
+</div>
+</div>
+
+<div class="panel">
+<h3>How It Will Work</h3>
+
+<ul class="features">
+<li>✅ One ticket type for GH₵30</li>
+<li>✅ Student name and phone number</li>
+<li>✅ Mobile Money payment integration planned</li>
+<li>✅ Unique ticket number planned</li>
+<li>✅ QR code generation planned</li>
+<li>✅ Staff ticket-scanning page planned</li>
+<li>✅ Duplicate-ticket prevention planned</li>
+<li>✅ Online and in-person sales planned</li>
+</ul>
+
+<div class="note">
+The features marked as planned need a secure server and database
+before they can be used for real ticket sales.
+</div>
+</div>
+
+</div>
+</section>
+
+<section class="section">
+<h2 class="section-title">How to Get Your Ticket</h2>
+<p class="section-subtitle">
+The proposed process for the finished system.
+</p>
+
+<div class="steps">
+<div class="step">
+<div class="step-number">1</div>
+<h3>Register</h3>
+<p>Enter your name and phone number.</p>
+</div>
+
+<div class="step">
+<div class="step-number">2</div>
+<h3>Pay GH₵30</h3>
+<p>Pay using an approved Mobile Money payment method.</p>
+</div>
+
+<div class="step">
+<div class="step-number">3</div>
+<h3>Receive Ticket</h3>
+<p>Receive your confirmed ticket and QR code.</p>
+</div>
+
+<div class="step">
+<div class="step-number">4</div>
+<h3>Enter the Event</h3>
+<p>Staff scan your QR code to validate your ticket.</p>
+</div>
+</div>
+</section>
+
+<footer>
+<p><strong>Nungua Senior High School SRC Day 2026</strong></p>
+<p>Event date: 23 November 2026 | Ticket: GH₵30</p>
+<p style="margin-top: 10px;">
+Student demonstration project — subject to SRC approval.
+</p>
+</footer>
+
+<script>
+const ticketForm = document.getElementById("ticketForm");
+const ticketResult = document.getElementById("ticketResult");
+
+ticketForm.addEventListener("submit", function (event) {
+event.preventDefault();
+
+const name = document.getElementById("studentName").value.trim();
+const phone = document.getElementById("studentPhone").value.trim();
+
+if (!name || !phone) {
+alert("Please enter your name and phone number.");
+return;
+}
+
+// This is a sample reference, not a real or paid ticket.
+const demoCode = "DEMO-" +
+Math.random().toString(36).substring(2, 8).toUpperCase();
+
+document.getElementById("ticketCode").textContent = demoCode;
+document.getElementById("ticketName").textContent = "Student: " + name;
+
+ticketResult.style.display = "block";
+ticketResult.scrollIntoView({
+behavior: "smooth",
+block: "start"
+});
+});
+
+document.getElementById("printTicket").addEventListener("click", function () {
+window.print();
+});
+</script>
+
+<style>
+@media print {
+body * {
+visibility: hidden;
+}
+
+#ticketResult,
+#ticketResult * {
+visibility: visible;
+}
+
+#ticketResult {
+display: block !important;
+position: absolute;
+left: 0;
+top: 0;
+width: 100%;
+background: white;
+}
+
+#printTicket {
+display: none;
+}
+}
+</style>
+
+</body>
+</html>
